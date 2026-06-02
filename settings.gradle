@@ -1,0 +1,29 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        maven { url = "https://maven.fabricmc.net/" }
+        maven { url = "https://repo.papermc.io/repository/maven-public/" }
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        maven { url = "https://maven.fabricmc.net/" }
+        maven { url = "https://repo.papermc.io/repository/maven-public/" }
+    }
+}
+
+rootProject.name = "DocBoti-timers"
+
+include "common:timer-core"
+include "common:playertimer-core"
+include "common:smptimer-core"
+
+include "fabric:playertimer-fabric"
+include "fabric:smptimer-fabric"
+
+include "paper:playertimer-paper"
+include "paper:smptimer-paper"

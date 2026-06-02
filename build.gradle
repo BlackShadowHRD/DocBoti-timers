@@ -1,0 +1,8 @@
+plugins {
+    id "fabric-loom" version "1.11-SNAPSHOT" apply false
+}
+
+subprojects {
+    group = "boti.doc"
+    version = "26.1.x-1.4"
+}
