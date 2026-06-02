@@ -4,7 +4,7 @@ import boti.doc.timer.TimerMode;
 import boti.doc.timer.TimerState;
 import boti.doc.timer.TimerOperationResult;
 
-import net.kyori.adventure.text.format.NamedTextColor;
+import boti.doc.timer.TimerColor;
 
 public class PlayerTimer {
 
@@ -12,14 +12,14 @@ public class PlayerTimer {
     private TimerState state;
     private boolean visible;
     private int time;
-    private NamedTextColor color;
+    private TimerColor color;
 
     public PlayerTimer(TimerMode mode, int startTime) {
         this.mode = mode;
         this.time = startTime;
         this.state = TimerState.READY;
         this.visible = true;
-        this.color = NamedTextColor.WHITE;
+        this.color = TimerColor.WHITE;
     }
 
     // --- Domain operations ---
@@ -100,7 +100,7 @@ public class PlayerTimer {
     }
 
     // This is to bypass the normal state preconditions during loading
-    void restore(TimerState state, boolean visible, NamedTextColor color) {
+    void restore(TimerState state, boolean visible, TimerColor color) {
         this.state = state;
         this.visible = visible;
         this.color = color;
@@ -112,8 +112,8 @@ public class PlayerTimer {
     public TimerState getState()      { return state; }
     public int getTime()              { return time; }
     public boolean isVisible()        { return visible; }
-    public NamedTextColor getColor()  { return color; }
+    public TimerColor getColor()  { return color; }
 
     public void setVisible(boolean visible) { this.visible = visible; }
-    public void setColor(NamedTextColor color) { this.color = color; }
+    public void setColor(TimerColor color) { this.color = color; }
 }
