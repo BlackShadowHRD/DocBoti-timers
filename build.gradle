@@ -1,5 +1,15 @@
+buildscript {
+    repositories {
+        maven { url = "https://fabricmc.net" }
+    }
+    dependencies {
+        // Change this line to force 1.15.5 or remove the block entirely
+        classpath "net.fabricmc:fabric-loom:1.15.5"
+    }
+}
+
 plugins {
-    id "fabric-loom" version "1.11-SNAPSHOT" apply false
+    id "net.fabricmc.fabric-loom" version "1.15.5" apply false
 }
 
 subprojects {
