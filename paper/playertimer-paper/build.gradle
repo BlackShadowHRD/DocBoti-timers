@@ -6,8 +6,13 @@ plugins {
 dependencies {
     compileOnly "io.papermc.paper:paper-api:${paper_version}"
 
+    implementation "com.moandjiezana.toml:toml4j:0.7.2"
     implementation project(":common:playertimer-core")
     implementation project(":common:timer-core")
+}
+
+tasks.shadowJar {
+    archiveClassifier.set("")
 }
 
 tasks.build {

@@ -26,9 +26,15 @@ public class PlayerTimerService implements Listener {
 
     private final Map<UUID, PlayerTimer> timers;
     private final TimerStore store;
+    private final PlayerTimerConfig config;
 
-    public PlayerTimerService(TimerStore store) {
+    public PlayerTimerService(
+            TimerStore store,
+            PlayerTimerConfig config) {
+
         this.store = store;
+        this.config = config;
+
         this.timers = store.load();
     }
 
@@ -47,7 +53,7 @@ public class PlayerTimerService implements Listener {
         }
 
         PlayerTimer newTimer = new PlayerTimer(TimerMode.COUNTUP, 0);
-        newTimer.setColor(parseColor(colorName));
+        newTimer.setColor(chooseColor(colorName));
         newTimer.start();
         timers.put(id, newTimer);
         saveAll();
@@ -69,7 +75,7 @@ public class PlayerTimerService implements Listener {
         }
 
         PlayerTimer newTimer = new PlayerTimer(TimerMode.COUNTDOWN, seconds);
-        newTimer.setColor(parseColor(colorName));
+        newTimer.setColor(chooseColor(colorName));
         newTimer.start();
         timers.put(id, newTimer);
         saveAll();
@@ -305,6 +311,14 @@ public class PlayerTimerService implements Listener {
 
         source.getSender().sendMessage("Only players can use this command.");
         return null;
+    }
+
+    private TimerColor chooseColor(String colorName) {
+        if (colorName == null || colorName.isBlank()) {
+            return config.getDefaultColor();
+        }
+
+        return parseColor(colorName);
     }
 
     private TimerColor parseColor(String colorName) {
