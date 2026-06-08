@@ -1,18 +1,14 @@
 plugins {
-    id 'net.fabricmc.fabric-loom' // Version is automatically inherited from root settings.gradle
+    id 'java-library'
     id 'maven-publish'
 }
 
-// Crucial: Tells Loom this is a shared abstract core, not an active mod loader target
-loom {
-    // Keeps Loom from generating Fabric-only manifest/mixin entry points
-    // and blocks it from executing unnecessary re-obfuscation cycles
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
 }
 
 dependencies {
-    // Loom can now successfully fetch and hook the vanilla jar for you!
-    minecraft "com.mojang:minecraft:26.1"
-
-    compileOnly "net.fabricmc:fabric-loader:0.18.4"
     api project(":common:timer-core")
 }
