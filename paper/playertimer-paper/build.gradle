@@ -1,11 +1,6 @@
 plugins {
     id 'java'
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
-    }
+    id 'com.gradleup.shadow'
 }
 
 dependencies {
@@ -13,4 +8,8 @@ dependencies {
 
     implementation project(":common:playertimer-core")
     implementation project(":common:timer-core")
+}
+
+tasks.build {
+    dependsOn tasks.shadowJar
 }

@@ -100,7 +100,7 @@ public class PlayerTimer {
     }
 
     // This is to bypass the normal state preconditions during loading
-    void restore(TimerState state, boolean visible, TimerColor color) {
+    public void restore(TimerState state, boolean visible, TimerColor color) {
         this.state = state;
         this.visible = visible;
         this.color = color;

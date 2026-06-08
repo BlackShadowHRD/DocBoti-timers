@@ -1,0 +1,21 @@
+name: PlayerTimer
+version: 1.4.0
+main: boti.doc.playertimer.PlayerTimerPlugin
+api-version: "26.1"
+description: Per-player timers for Paper servers.
+author: DocBoti
+
+commands:
+  playertimer:
+    description: Manage your personal timer
+    usage: /playertimer
+    permission: playertimer.use
+
+permissions:
+  playertimer.use:
+    description: Allows use of personal timer commands
+    default: true
+  playertimer.admin:
+    description: Allows use of admin timer commands
+    default: op
+
