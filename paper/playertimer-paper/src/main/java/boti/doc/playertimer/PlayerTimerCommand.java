@@ -34,7 +34,7 @@ public class PlayerTimerCommand {
     }
 
     public void register(LifecycleEventManager<Plugin> lifecycleManager) {
-        lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+        lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS, event ->
             event.registrar().register(
                     Commands.literal("playertimer")
                             .then(buildStartCountup())
@@ -53,8 +53,8 @@ public class PlayerTimerCommand {
                                     .executes(ctx -> timerService.showTimer(ctx.getSource())))
                             .then(buildAdmin())
                             .build()
-            );
-        });
+            )
+        );
     }
 
     private LiteralArgumentBuilder<CommandSourceStack> buildStartCountup() {

@@ -1,17 +1,5 @@
 package boti.doc.playertimer;
 
-/*
-import boti.doc.timer.TimerMode;
-import boti.doc.timer.TimerState;
-import boti.doc.timer.TimerColor;
-import boti.doc.timer.TimeParser;
-
-import com.mojang.brigadier.arguments.StringArgumentType;
-
-import io.papermc.paper.command.brigadier.Commands;
-import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
-*/
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 

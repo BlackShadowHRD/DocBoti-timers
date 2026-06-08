@@ -14,7 +14,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -303,9 +302,8 @@ public class PlayerTimerService implements Listener {
         if (source.getExecutor() instanceof Player player) {
             return new TimerCommandContext(player, source);
         }
-        if (source.getSender() != null) {
-            source.getSender().sendMessage("Only players can use this command.");
-        }
+
+        source.getSender().sendMessage("Only players can use this command.");
         return null;
     }
 

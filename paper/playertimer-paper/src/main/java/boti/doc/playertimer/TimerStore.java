@@ -8,8 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-// import net.kyori.adventure.text.format.NamedTextColor;
-
 import org.bukkit.Bukkit;
 
 import java.io.*;
