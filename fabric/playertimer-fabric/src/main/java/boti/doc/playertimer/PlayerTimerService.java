@@ -19,14 +19,23 @@ import net.minecraft.sounds.SoundSource;
 
 import java.util.Map;
 import java.util.UUID;
+import java.nio.file.Path;
+
+import org.slf4j.Logger;
 
 public class PlayerTimerService {
 
     private final Map<UUID, PlayerTimer> timers;
     private final TimerStore store;
+    private final PlayerTimerConfig config;
 
-    public PlayerTimerService(TimerStore store) {
+    public PlayerTimerService(
+            TimerStore store,
+            PlayerTimerConfig config) {
+
         this.store = store;
+        this.config = config;
+
         this.timers = store.load();
     }
 
@@ -34,6 +43,8 @@ public class PlayerTimerService {
 
     public int startCountup(CommandSourceStack source, String colorName) {
         TimerCommandContext ctx = requirePlayer(source);
+        TimerColor color;
+
         if (ctx == null) return Command.SINGLE_SUCCESS;
 
         UUID id = ctx.player().getUUID();
@@ -44,8 +55,14 @@ public class PlayerTimerService {
             return Command.SINGLE_SUCCESS;
         }
 
+        // If the command does not specify a colour for the timer display, use the default from the config file
         PlayerTimer newTimer = new PlayerTimer(TimerMode.COUNTUP, 0);
-        newTimer.setColor(parseColor(colorName));
+        if (colorName != null) {
+            color = parseColor(colorName);
+        } else {
+            color = config.getDefaultColor();
+        }
+        newTimer.setColor(color);
         newTimer.start();
         timers.put(id, newTimer);
         saveAll();
@@ -56,6 +73,8 @@ public class PlayerTimerService {
 
     public int startCountdown(CommandSourceStack source, int seconds, String colorName) {
         TimerCommandContext ctx = requirePlayer(source);
+        TimerColor color;
+
         if (ctx == null) return Command.SINGLE_SUCCESS;
 
         UUID id = ctx.player().getUUID();
@@ -66,8 +85,15 @@ public class PlayerTimerService {
             return Command.SINGLE_SUCCESS;
         }
 
+        // If the command does not specify a colour for the timer display, use the default from the config file
         PlayerTimer newTimer = new PlayerTimer(TimerMode.COUNTDOWN, seconds);
-        newTimer.setColor(parseColor(colorName));
+
+        if (colorName != null) {
+            color = parseColor(colorName);
+        } else {
+            color = config.getDefaultColor();
+        }
+        newTimer.setColor(color);
         newTimer.start();
         timers.put(id, newTimer);
         saveAll();

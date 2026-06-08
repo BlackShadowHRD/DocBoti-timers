@@ -58,7 +58,7 @@ public class PlayerTimerCommand {
     private LiteralArgumentBuilder<CommandSourceStack> buildStartCountup() {
         return Commands.literal("startcountup")
                 .executes(ctx ->
-                        timerService.startCountup(ctx.getSource(), "white"))
+                        timerService.startCountup(ctx.getSource(), null))
                 .then(Commands.argument("color", StringArgumentType.word())
                         .executes(ctx -> {
                             String color = StringArgumentType.getString(ctx, "color");
@@ -70,11 +70,11 @@ public class PlayerTimerCommand {
     private LiteralArgumentBuilder<CommandSourceStack> buildStartCountdown() {
         return Commands.literal("startcountdown")
                 .executes(ctx ->
-                        timerService.startCountdown(ctx.getSource(), 300, "white"))
+                        timerService.startCountdown(ctx.getSource(), 300, null))
                 .then(Commands.argument("duration", StringArgumentType.word())
                         .executes(ctx -> {
                             String duration = StringArgumentType.getString(ctx, "duration");
-                            return timerService.executeStartCountdown(ctx, duration, "white");
+                            return timerService.executeStartCountdown(ctx, duration, null);
                         })
                         .then(Commands.argument("color", StringArgumentType.word())
                                 .executes(ctx -> {

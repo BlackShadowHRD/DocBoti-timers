@@ -8,10 +8,13 @@ dependencies {
 
     implementation "net.fabricmc:fabric-loader:${loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    implementation "com.moandjiezana.toml:toml4j:0.7.2"
 
     implementation project(":common:playertimer-core")
     implementation project(":common:timer-core")
 
     include project(":common:playertimer-core")
     include project(":common:timer-core")
+
+    include "com.moandjiezana.toml:toml4j:0.7.2"
 }

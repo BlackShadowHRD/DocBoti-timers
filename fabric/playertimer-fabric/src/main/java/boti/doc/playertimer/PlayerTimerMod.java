@@ -10,6 +10,10 @@ import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class PlayerTimerMod implements ModInitializer {
 
     public static final Logger LOGGER = LoggerFactory.getLogger("playertimer");
@@ -19,15 +23,29 @@ public class PlayerTimerMod implements ModInitializer {
     private int ticksUntilAutoSave = AUTO_SAVE_INTERVAL_TICKS;
 
     private PlayerTimerService timerService;
+    private PlayerTimerConfig config;
 
     @Override
     public void onInitialize() {
-        TimerStore store = new TimerStore(
-                FabricLoader.getInstance().getConfigDir().resolve("playertimer"),
-                LOGGER
-        );
 
-        timerService = new PlayerTimerService(store);
+        Path baseDir = FabricLoader.getInstance()
+                .getConfigDir()
+                .resolve("playertimer");
+
+        try {
+            Files.createDirectories(baseDir);
+        } catch (IOException e) {
+            LOGGER.error("Failed to create PlayerTimer config directory", e);
+        }
+
+        PlayerTimerConfig config =
+                new FabricConfigLoader(baseDir).load();
+
+        TimerStore store =
+                new TimerStore(baseDir, LOGGER);
+
+        timerService =
+                new PlayerTimerService(store, config);
 
         registerCommands();
         registerTimerTick();
