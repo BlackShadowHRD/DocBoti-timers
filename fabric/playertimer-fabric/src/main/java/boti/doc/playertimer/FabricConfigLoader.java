@@ -12,7 +12,7 @@ public class FabricConfigLoader {
     private final Path configFile;
 
     public FabricConfigLoader(Path configDir) {
-        this.configFile = configDir.resolve("playertimer.toml");
+        this.configFile = configDir.resolve("config.toml");
     }
 
     public PlayerTimerConfig load() {
